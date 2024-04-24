@@ -8,15 +8,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-
-  @Get('insert-data')
-  async insertData(): Promise<string> {
-    try {
-      await this.appService.insertNew();
-      return 'Data inserted successfully';
-    } catch (error) {
-      return 'Failed to insert data';
-    }
-  }
 }
