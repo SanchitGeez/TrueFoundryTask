@@ -1,4 +1,4 @@
-import { Controller, Post,Get, Body, ValidationPipe } from '@nestjs/common';
+import { Controller, Post,Get, Body, ValidationPipe,Query } from '@nestjs/common';
 import { OpenaiService } from './openai.service';
 
 @Controller('openai')
@@ -9,6 +9,7 @@ export class OpenaiController {
     singlePrompt(@Body(ValidationPipe) messages){
         return this.openaiService.singlePrompt(messages);
     }   
+
     @Post('insertPromptHistory')
   async addData(@Body() data): Promise<void> {
     try {
@@ -20,11 +21,18 @@ export class OpenaiController {
     }
   }
 
-    @Get('exQ')
-  async getData(): Promise<any> {
+  @Get('getData')
+  async getData(@Query() queryParams?: any): Promise<any> {
     try {
-      // Example SELECT query
-      const query = 'SELECT * FROM TFtask.prompt_history';
+      let query = 'SELECT * FROM TFtask.prompt_history';
+      // Check if query parameters are provided
+      if (queryParams) {
+        const conditions = Object.keys(queryParams)
+          .map(key => `${key}='${queryParams[key]}'`)
+          .join(' AND ');
+        query += ` WHERE ${conditions}`;
+      }
+
       const data = await this.openaiService.executeQuery(query);
       return data;
     } catch (error) {
