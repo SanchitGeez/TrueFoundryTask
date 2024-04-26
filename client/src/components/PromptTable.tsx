@@ -15,8 +15,11 @@ interface PromptHistory {
 }
 
 const PromptTable = () => {
+
+    //table data
     const [data, setData] = useState<PromptHistory[]>([]);
 
+    //filters
     const [userId, setUserId] = useState('');
     const [requestId, setRequestId] = useState('');
     const [status, setStatus] = useState('');
@@ -28,37 +31,29 @@ const PromptTable = () => {
       e.preventDefault();
       let params: string = '';
   
-      // Add conditions for userId
       if (userId !== '') {
           params += 'userId=' + userId;
       }
-  
-      // Add conditions for requestId
       if (requestId !== '') {
           params += (params !== '' ? '&' : '') + 'requestId=' + requestId;
       }
-  
-      // Add conditions for status
       if (status !== '') {
           params += (params !== '' ? '&' : '') + 'status=' + status;
       }
-  
-      // Add conditions for model
       if (model !== '') {
           params += (params !== '' ? '&' : '') + 'model=' + model;
       }
-  
-      // Add conditions for request
       if (request !== '') {
           params += (params !== '' ? '&' : '') + 'request=' + request;
       }
-  
-      // Add conditions for response
       if (response !== '') {
           params += (params !== '' ? '&' : '') + 'response=' + response;
       }
+
       if(params!==''){
         fetchData(params);
+      }else{
+        fetchData("requestId=1");
       }
 
       console.log(model);
