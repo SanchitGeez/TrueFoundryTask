@@ -177,3 +177,13 @@
     background-color: #0056b3;
   }
   
+  .buttonStyle {
+    background-color:#333 ;
+    color: #fff;
+    width: 10%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+  }
