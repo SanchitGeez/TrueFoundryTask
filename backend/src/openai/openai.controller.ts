@@ -5,17 +5,11 @@ import { OpenaiService } from './openai.service';
 export class OpenaiController {
     constructor(private readonly openaiService: OpenaiService) {}
 
-    // @Post('singlePrompt')
-    // singlePrompt(@Body(ValidationPipe) req){
-    //     return this.openaiService.singlePrompt(req.messages);.
-    // }   
-
     @Post('insertPromptHistory')
     async addData(@Body() data): Promise<void> {
     try {
       await this.openaiService.insertData(data);
     } catch (error) {
-      // Handle error
       console.error('Error adding data:', error);
       throw error;
     }
@@ -25,7 +19,7 @@ export class OpenaiController {
   async getData(@Query() queryParams?: any): Promise<any> {
     try {
       let query = 'SELECT * FROM prompt_history';
-      // Check if query parameters are provided
+
       if (queryParams) {
         const conditions = Object.keys(queryParams)
           .map(key => `${key}='${queryParams[key]}'`)
@@ -36,7 +30,6 @@ export class OpenaiController {
       const data = await this.openaiService.executeQuery(query);
       return data;
     } catch (error) {
-      // Handle error
       console.error('Error fetching data:', error);
       throw error;
     }
@@ -47,32 +40,8 @@ export class OpenaiController {
     try {
       return this.openaiService.getUserStats(data);
     } catch (error) {
-      // Handle error
       console.error('Error fetching user stats:', error);
       throw error;
     }
   }
-
-
 }
-
-
-// CREATE TABLE IF NOT EXISTS TFtask.prompt_history
-// (
-//     userId UInt64 DEFAULT 1,
-//     requestId UInt64 DEFAULT 1,
-//     createdAt DateTime DEFAULT now(),
-//     status String,
-//     request String,
-//     response String,
-//     model String,
-//     promptTokens UInt64,
-//     completionTokens UInt64
-// )
-// ENGINE = MergeTree()
-// PRIMARY KEY (requestId)
-
-
-//INSERT INTO TFtask.prompt_history VALUES (DEFAULT,DEFAULT,DEFAULT,'SUCCESS','How many moons does jupiter has?','Jupiter has 95 Moons','gpt-3.5-turbo',13,9);
-
-//select * from TFtask.prompt_history

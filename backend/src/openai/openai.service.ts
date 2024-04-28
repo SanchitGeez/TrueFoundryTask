@@ -1,8 +1,5 @@
 import { Injectable,Inject } from '@nestjs/common';
-import OpenAI from "openai";
-import { ChatCompletionCreateParams } from 'openai/resources';
 import { ClickHouse } from 'clickhouse';
-import { createClient } from '@clickhouse/client'
 import 'dotenv/config';
 
 interface PromptHistory {
@@ -29,6 +26,8 @@ export class OpenaiService {
           password: process.env.DB_PASS || 'cKoI2R9Fun~R3',
         });
       }
+
+      
     async executeQuery(query: string): Promise<any> {
       try {
         const result = await this.clickHouse.query(query).toPromise();
@@ -46,7 +45,6 @@ export class OpenaiService {
         const createdAtValue = data.createdAt ? `'${data.createdAt}'` : 'NOW()';
     
         const modifiedResponse  = data.response.replace(/'/g, "\\'")
-        console.log("modified responseeeeeeeeeeeeeeeeeeeeeee",modifiedResponse)
         const query = `
           INSERT INTO prompt_history
           (userId, requestId, createdAt, status, request, response, model, promptTokens, completionTokens)
@@ -65,6 +63,7 @@ export class OpenaiService {
 
     async getUserStats(data) {
       const u = "'"+data.userId+"'";
+      
       // Query to find the total number of requests by userId
       const totalRequestsQuery = `SELECT COUNT(*) AS totalRequests FROM prompt_history WHERE userId = ${u}`;
       const totalRequestsResult = await this.executeQuery(totalRequestsQuery);
@@ -123,35 +122,5 @@ export class OpenaiService {
         dailyTokens 
       };
   }
-  
-
-    // async insertPromptHistory(){
-    //     this.promptServer
-    //   .insert<PromptHistory>('prompt_history', [
-    //     {
-    //     userId:1,
-    //     requestId:1,
-    //     createdAt : new Date().getTime(),
-    //     status: 'SUCCESS',
-    //     request: 'Who are you?',
-    //     response: 'I am the chatGPT by OpenAI',
-    //     model: 'gpt-3.5-turbo',
-    //     promptTokens:9,
-    //     completionTokens:12,
-    //     },
-    //   ])
-    //   .subscribe({
-    //     error: (err: any): void => {
-    //       console.log('error');
-    //     },
-    //     next: (): void => {
-    //       // currently next does not emits anything for inserts
-    //     },
-    //     complete: (): void => {
-    //       console.log('compleeete')
-    //     },
-    //   });
-    //     return "rows";
-    // }
 
 }
