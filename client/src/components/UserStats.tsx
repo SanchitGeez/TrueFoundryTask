@@ -19,7 +19,7 @@ const UserStats: React.FC = () => {
   const fetchData = async () => {
     try {
 
-      const response = await axios.post<UserStatsData>('http://localhost:3000/openai/getUserStats', { userId:userId });
+      const response = await axios.post<UserStatsData>('https://true-foundry-task-i6ap.vercel.app/openai/getUserStats', { userId:userId });
       setUserStats(response.data);
     } catch (error) {
       console.error('Error fetching user stats:', error);

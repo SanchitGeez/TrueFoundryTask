@@ -25,7 +25,7 @@ const ChatBox: React.FC = () => {
 
   const callInsert = async()=>{
     console.log("response before calling",gptResponse)
-    await axios.post("http://localhost:3000/openai/insertPromptHistory",logPromptEntry);
+    await axios.post("https://true-foundry-task-i6ap.vercel.app/openai/insertPromptHistory",logPromptEntry);
   }
 
 

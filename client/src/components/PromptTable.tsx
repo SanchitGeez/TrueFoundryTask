@@ -63,7 +63,7 @@ const PromptTable = () => {
 
     const fetchData = async (params:string) => {
       try {
-        const response = await axios.get<PromptHistory[]>('http://localhost:3000/openai/getData?'+params);
+        const response = await axios.get<PromptHistory[]>('https://true-foundry-task-i6ap.vercel.app/openai/getData?'+params);
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
