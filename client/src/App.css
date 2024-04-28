@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.filterFields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .inputContainer {
+    margin-bottom: 10px;
+  }
+  
+  .inputContainer label {
+    display: block;
+  }
+  
+  .inputContainer input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .dataTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .dataTable th, .dataTable td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .dataTable th {
+    background-color: #f2f2f2;
+  }
+  
+
+
+  /* ==================> USER STATS */
+
+  .userStatsForm {
+    margin-bottom: 20px;
+  }
+  
+  .userStatsForm label {
+    margin-right: 10px;
+  }
+  
+  .userStatsForm input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .userStatsForm button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .userStatsForm button:hover {
+    background-color: #0056b3;
+  }
+  
+  .userStatsContainer {
+    margin-top: 20px;
+  }
+  
+  .userStatsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .userStatsTable th,
+  .userStatsTable td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  .userStatsTable th {
+    background-color: #f2f2f2;
+  }
+  
+  .chartsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .chartWrapper {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .chart {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
+  /* ==================> CHAT BOX*/
+
+  .chatBox {
+    width: 400px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .conversation {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .userMessage {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .chatGPTMessage {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input {
+    width: calc(100% - 70px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 60px;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

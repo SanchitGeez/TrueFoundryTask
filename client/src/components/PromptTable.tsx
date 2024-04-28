@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 interface PromptHistory {
@@ -27,7 +28,7 @@ const PromptTable = () => {
     const [request, setRequest] = useState('');
     const [response,setResponse] = useState('');
 
-    const handleFilterApply = (e: any) => {
+    const handleFilterApply = (e: React.FormEvent) => {
       e.preventDefault();
       let params: string = '';
   
@@ -53,7 +54,7 @@ const PromptTable = () => {
       if(params!==''){
         fetchData(params);
       }else{
-        fetchData("requestId=1");
+        fetchData("model=gpt-3.5-turbo");
       }
 
       console.log(model);
@@ -70,43 +71,42 @@ const PromptTable = () => {
     };
 
     useEffect(() => {
-        fetchData("requestId=1");
+        fetchData("status=SUCCESS");
   }, []);
   return (
     <div>
-      <h1>Your Data</h1>
+      <Link to="/">
+        <h4>HOMEPAGE</h4>
+      </Link>
+      <h1>All Data</h1>
       <form className="filterFields" onSubmit={handleFilterApply}>
-        <div>
-            <label htmlFor="userId">User ID:</label>
-            <input type="text" id="userId" name="userId" value={userId} onChange={(e)=>setUserId(e.target.value)} />
+        <div className="inputContainer">
+          <label htmlFor="userId">User ID:</label>
+          <input type="text" id="userId" name="userId" value={userId} onChange={(e) => setUserId(e.target.value)} />
         </div>
-        <div>
-      <label htmlFor="requestId">Request ID:</label>
-      <input type="text" id="requestId" name="requestId" value={requestId} onChange={(e) => setRequestId(e.target.value)} />
-      </div>
-
-        <div>
-            <label htmlFor="status">Status:</label>
-            <input type="text" id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)} />
+        <div className="inputContainer">
+          <label htmlFor="requestId">Request ID:</label>
+          <input type="text" id="requestId" name="requestId" value={requestId} onChange={(e) => setRequestId(e.target.value)} />
         </div>
-
-        <div>
-            <label htmlFor="model">Model:</label>
-            <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} />
+        <div className="inputContainer">
+          <label htmlFor="status">Status:</label>
+          <input type="text" id="status" name="status" value={status} onChange={(e) => setStatus(e.target.value)} />
         </div>
-
-        <div>
-            <label htmlFor="request">Request:</label>
-            <input type="text" id="request" name="request" value={request} onChange={(e) => setRequest(e.target.value)} />
+        <div className="inputContainer">
+          <label htmlFor="model">Model:</label>
+          <input type="text" id="model" name="model" value={model} onChange={(e) => setModel(e.target.value)} />
         </div>
-
-        <div>
-            <label htmlFor="response">Response:</label>
-            <input type="text" id="response" name="response" value={response} onChange={(e) => setResponse(e.target.value)} />
+        <div className="inputContainer">
+          <label htmlFor="request">Request:</label>
+          <input type="text" id="request" name="request" value={request} onChange={(e) => setRequest(e.target.value)} />
+        </div>
+        <div className="inputContainer">
+          <label htmlFor="response">Response:</label>
+          <input type="text" id="response" name="response" value={response} onChange={(e) => setResponse(e.target.value)} />
         </div>
         <button type='submit'>Search</button>
       </form>
-      <table>
+      <table className="dataTable">
         <thead>
           <tr>
             <th>User ID</th>
@@ -122,7 +122,7 @@ const PromptTable = () => {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr>
+            <tr key={item.requestId}>
               <td>{item.userId}</td>
               <td>{item.requestId}</td>
               <td>{item.createdAt}</td>
@@ -138,6 +138,7 @@ const PromptTable = () => {
       </table>
     </div>
   )
-}
+};
+  
 
 export default PromptTable

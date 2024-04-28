@@ -2,4 +2,5 @@
 /backend/dist
 /backend/build
 /backend/.env
+/client/.env
 /client/node_modules

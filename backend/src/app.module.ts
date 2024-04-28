@@ -5,14 +5,7 @@ import { ClickHouseModule } from '@depyronick/nestjs-clickhouse';
 import { OpenaiModule } from './openai/openai.module';
 
 @Module({
-  imports: [ClickHouseModule.register([
-    {
-      name: 'ANALYTICS_SERVER',
-      host: '127.0.0.1',
-      port: 8123,
-      database: 'TFtask'
-    },
-  ]), OpenaiModule,],
+  imports: [OpenaiModule,],
   controllers: [AppController],
   providers: [AppService],
 })
